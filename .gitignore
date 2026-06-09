@@ -1,0 +1,9 @@
+.env
+ddd
+lol.ipynb
+processed_data.json
+prepare_db.ipynb
+/output/
+/images/
+/supabase/
+*.md

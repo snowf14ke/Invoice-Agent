@@ -1,0 +1,22 @@
+name: BUild and push  Docker Image to docker hub
+
+on: 
+  [workflow_dispatch] # when we wan manual push
+  # push:  # this is for only build and push when dockerfile is changed
+  #   branches: ['main']
+  #   paths: 
+  #     - 'ocr/Dockerfile'
+
+
+jobs:
+  publishes_images:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: build image 
+        run: docker build ./ocr/ --tag 8nowflake/ocr_app:latest
+      - name: push
+        run: |
+          docker push 8nowflake/ocr_app:latest

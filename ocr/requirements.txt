@@ -1,0 +1,9 @@
+runpod
+
+Pillow==10.4.0
+numpy
+#==1.26.4
+transformers>=5.0.0
+sentencepiece==0.2.0
+requests==2.32.3
+accelerate>=0.30.0

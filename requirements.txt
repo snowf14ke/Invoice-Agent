@@ -1,0 +1,28 @@
+# --- agent / orchestration ---
+langgraph
+langchain-core
+langchain-google-genai          # agent LLM (Gemini)
+
+# --- extraction + embeddings (OpenAI) ---
+openai                           # extraction (instructor) + text-embedding-3-small
+instructor                       # structured extraction into Pydantic schemas
+
+# --- database (Supabase / Postgres + pgvector) ---
+psycopg[binary,pool]
+pgvector                         # register_vector + vector(1536) support
+supabase                         # only needed for URL-mode image upload (Phase 0)
+
+# --- data / OCR pipeline ---
+datasets
+pillow                           # PIL image handling in the notebook
+python-dateutil                  # schemas.normalize_date
+requests
+runpod                           # deploy/manage the PaddleOCR endpoint
+jsonref
+
+# --- evaluation ---
+ragas
+pandas
+
+# --- config ---
+python-dotenv                    # NOTE: the importable module is `dotenv`; the PyPI package is python-dotenv
