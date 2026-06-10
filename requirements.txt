@@ -1,3 +1,7 @@
+# --- backend API ---
+fastapi
+uvicorn[standard]               # ASGI server: uvicorn main:app
+
 # --- agent / orchestration ---
 langgraph
 langchain-core

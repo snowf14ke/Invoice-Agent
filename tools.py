@@ -22,8 +22,8 @@ def query_fields(vendor: str | None = None, min_total: float | None = None) -> s
             """
             select vendor, total_gross_worth, doc_date, invoice_number
             from documents
-            where (%(vendor)s is null or vendor ilike %(vendor)s)
-              and (%(min_total)s is null or total_gross_worth >= %(min_total)s)
+            where (%(vendor)s::text is null or vendor ilike '%%' || %(vendor)s || '%%')
+              and (%(min_total)s::numeric is null or total_gross_worth >= %(min_total)s)
             order by doc_date
             """,
             {"vendor": vendor, "min_total": min_total},
@@ -45,8 +45,10 @@ def search_text(query: str, k: int = 5) -> str:
     query_vec = embed_query(query)
     with get_conn() as conn, conn.cursor() as cur:
         # <=> is pgvector's cosine-distance operator; smaller = more similar.
+        # ::vector — psycopg sends a Python list as float8[], and no <=> operator
+        # exists for (vector, float8[]); the explicit cast resolves it.
         cur.execute(
-            "select content from chunks order by embedding <=> %s limit %s",
+            "select content from chunks order by embedding <=> %s::vector limit %s",
             (query_vec, k),
         )
         hits = [r[0] for r in cur.fetchall()]

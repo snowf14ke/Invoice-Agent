@@ -20,6 +20,7 @@ CREATE TABLE documents (
     invoice_number    VARCHAR(100),
     image_url         TEXT,                  -- traceability to Supabase storage
     raw_ocr           TEXT,                  -- original OCR text, for re-extraction / eval
+    source_id         VARCHAR(64),           -- e.g. "ds_42": which dataset image this came from
     created_at        TIMESTAMPTZ DEFAULT now()
 );
 
@@ -48,3 +49,7 @@ CREATE INDEX IF NOT EXISTS chunks_embedding_hnsw
 
 -- Helps exact/aggregate vendor filters used by the agent's query_fields tool.
 CREATE INDEX IF NOT EXISTS documents_vendor_idx ON documents (vendor);
+
+-- One row per source image: stops the live demo from ingesting the same dataset image twice.
+CREATE UNIQUE INDEX IF NOT EXISTS documents_source_id_uq
+    ON documents (source_id) WHERE source_id IS NOT NULL;

@@ -1,0 +1,706 @@
+[
+  {
+    "question": "Who is the seller on invoice 10372826?",
+    "ground_truth": "Graham, Briggs and Anderson",
+    "type": "seller",
+    "target_invoices": [
+      "10372826"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 58162869?",
+    "ground_truth": "$ 36 210,72",
+    "type": "gross-worth",
+    "target_invoices": [
+      "58162869"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 61356291?",
+    "ground_truth": "Chapman, Kim and Green",
+    "type": "seller",
+    "target_invoices": [
+      "61356291"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 69941787?",
+    "ground_truth": "$35572,00",
+    "type": "gross-worth",
+    "target_invoices": [
+      "69941787"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 23004223?",
+    "ground_truth": "$ 450,54",
+    "type": "gross-worth",
+    "target_invoices": [
+      "23004223"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 99788357?",
+    "ground_truth": "Lee-Everett",
+    "type": "seller",
+    "target_invoices": [
+      "99788357"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 91966464?",
+    "ground_truth": "Taylor and Sons",
+    "type": "seller",
+    "target_invoices": [
+      "91966464"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 42242778?",
+    "ground_truth": "Roberson and Sons",
+    "type": "seller",
+    "target_invoices": [
+      "42242778"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 81432357?",
+    "ground_truth": "Tran LLC",
+    "type": "seller",
+    "target_invoices": [
+      "81432357"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 54533510?",
+    "ground_truth": "Tucker Inc",
+    "type": "seller",
+    "target_invoices": [
+      "54533510"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 61619303?",
+    "ground_truth": "$1057,33",
+    "type": "gross-worth",
+    "target_invoices": [
+      "61619303"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 64480147?",
+    "ground_truth": "$3046,86",
+    "type": "gross-worth",
+    "target_invoices": [
+      "64480147"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 60241381?",
+    "ground_truth": "Stevens-Black",
+    "type": "seller",
+    "target_invoices": [
+      "60241381"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 45181097?",
+    "ground_truth": "Long, Alvarez and Mendoza",
+    "type": "seller",
+    "target_invoices": [
+      "45181097"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 61268082?",
+    "ground_truth": "$ 14,00",
+    "type": "gross-worth",
+    "target_invoices": [
+      "61268082"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 78566408?",
+    "ground_truth": "228,68",
+    "type": "gross-worth",
+    "target_invoices": [
+      "78566408"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 43846862?",
+    "ground_truth": "Phillips PLC USCGC Harrington FPO AE",
+    "type": "seller",
+    "target_invoices": [
+      "43846862"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 70123184?",
+    "ground_truth": "Kelly, Hernandez and Vaughan",
+    "type": "seller",
+    "target_invoices": [
+      "70123184"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 27892893?",
+    "ground_truth": "Reeves-Campbel.",
+    "type": "seller",
+    "target_invoices": [
+      "27892893"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 57468195?",
+    "ground_truth": "$98,58",
+    "type": "gross-worth",
+    "target_invoices": [
+      "57468195"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 67113656?",
+    "ground_truth": "Henson-Cross",
+    "type": "seller",
+    "target_invoices": [
+      "67113656"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 27216737?",
+    "ground_truth": "$18 561,36",
+    "type": "gross-worth",
+    "target_invoices": [
+      "27216737"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 75106829?",
+    "ground_truth": "$ 354,15",
+    "type": "gross-worth",
+    "target_invoices": [
+      "75106829"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 92627663?",
+    "ground_truth": "Solis Group",
+    "type": "seller",
+    "target_invoices": [
+      "92627663"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 92802196?",
+    "ground_truth": "686,75",
+    "type": "gross-worth",
+    "target_invoices": [
+      "92802196"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 53737787?",
+    "ground_truth": "$ 205,50",
+    "type": "gross-worth",
+    "target_invoices": [
+      "53737787"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 16692901?",
+    "ground_truth": "Jackson-Oliver",
+    "type": "seller",
+    "target_invoices": [
+      "16692901"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 27485789?",
+    "ground_truth": "$ 705,92",
+    "type": "gross-worth",
+    "target_invoices": [
+      "27485789"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 49923258?",
+    "ground_truth": "$1182,50",
+    "type": "gross-worth",
+    "target_invoices": [
+      "49923258"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 38248291?",
+    "ground_truth": "Campbell and Sons USNS Smith FPO AP",
+    "type": "seller",
+    "target_invoices": [
+      "38248291"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 56514066?",
+    "ground_truth": "$ 49,38",
+    "type": "gross-worth",
+    "target_invoices": [
+      "56514066"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 16692901?",
+    "ground_truth": "Total",
+    "type": "gross-worth",
+    "target_invoices": [
+      "16692901"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 83613779?",
+    "ground_truth": "Larson-Grant",
+    "type": "seller",
+    "target_invoices": [
+      "83613779"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 54569960?",
+    "ground_truth": "$ 323,11",
+    "type": "gross-worth",
+    "target_invoices": [
+      "54569960"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 69087316?",
+    "ground_truth": "Simmons-Henry",
+    "type": "seller",
+    "target_invoices": [
+      "69087316"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 76999802?",
+    "ground_truth": "$81661,14",
+    "type": "gross-worth",
+    "target_invoices": [
+      "76999802"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 20385371?",
+    "ground_truth": "Hess and Sons",
+    "type": "seller",
+    "target_invoices": [
+      "20385371"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 86602235?",
+    "ground_truth": "$3729,94",
+    "type": "gross-worth",
+    "target_invoices": [
+      "86602235"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 76820481?",
+    "ground_truth": "$ 117,04",
+    "type": "gross-worth",
+    "target_invoices": [
+      "76820481"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 76330023?",
+    "ground_truth": "Baker-Jackson",
+    "type": "seller",
+    "target_invoices": [
+      "76330023"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 82087318?",
+    "ground_truth": "$ 12 119,61",
+    "type": "gross-worth",
+    "target_invoices": [
+      "82087318"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 61356291?",
+    "ground_truth": "$ 212,09",
+    "type": "gross-worth",
+    "target_invoices": [
+      "61356291"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 26363966?",
+    "ground_truth": "Griffin, Cox and Day",
+    "type": "seller",
+    "target_invoices": [
+      "26363966"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 60860535?",
+    "ground_truth": "Shields, Copeland and Gallegos",
+    "type": "seller",
+    "target_invoices": [
+      "60860535"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 10372826?",
+    "ground_truth": "$ 276,60",
+    "type": "gross-worth",
+    "target_invoices": [
+      "10372826"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 61264237?",
+    "ground_truth": "$ 288,15",
+    "type": "gross-worth",
+    "target_invoices": [
+      "61264237"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 57168813?",
+    "ground_truth": "$ 19,77",
+    "type": "gross-worth",
+    "target_invoices": [
+      "57168813"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 46301857?",
+    "ground_truth": "$65,29",
+    "type": "gross-worth",
+    "target_invoices": [
+      "46301857"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 59482422?",
+    "ground_truth": "$ 934,31",
+    "type": "gross-worth",
+    "target_invoices": [
+      "59482422"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 99763738?",
+    "ground_truth": "$403,25",
+    "type": "gross-worth",
+    "target_invoices": [
+      "99763738"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 43417184?",
+    "ground_truth": "$ 339,79",
+    "type": "gross-worth",
+    "target_invoices": [
+      "43417184"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 15259432?",
+    "ground_truth": "Franklin, Buchanan and Reed",
+    "type": "seller",
+    "target_invoices": [
+      "15259432"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 80036269?",
+    "ground_truth": "$79238,76",
+    "type": "gross-worth",
+    "target_invoices": [
+      "80036269"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 10817861?",
+    "ground_truth": "Hughes-jones",
+    "type": "seller",
+    "target_invoices": [
+      "10817861"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 86883880?",
+    "ground_truth": "$ 225,19",
+    "type": "gross-worth",
+    "target_invoices": [
+      "86883880"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 61268082?",
+    "ground_truth": "Henson, Mccarthy and Hart",
+    "type": "seller",
+    "target_invoices": [
+      "61268082"
+    ]
+  },
+  {
+    "question": "What is the total gross worth of invoice 15700884?",
+    "ground_truth": "$ 43,96",
+    "type": "gross-worth",
+    "target_invoices": [
+      "15700884"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 82087318?",
+    "ground_truth": "Hughes LLC",
+    "type": "seller",
+    "target_invoices": [
+      "82087318"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 59482422?",
+    "ground_truth": "Avila-Espinoza",
+    "type": "seller",
+    "target_invoices": [
+      "59482422"
+    ]
+  },
+  {
+    "question": "Who is the seller on invoice 74322107?",
+    "ground_truth": "Davis-Obrien",
+    "type": "seller",
+    "target_invoices": [
+      "74322107"
+    ]
+  },
+  {
+    "question": "How much did we spend in total on dresses, across all invoices?",
+    "ground_truth": "4483.91",
+    "type": "category-spend",
+    "target_invoices": [
+      "27301261",
+      "63665479",
+      "70123184",
+      "81163184",
+      "19961329",
+      "75499908",
+      "61264237",
+      "26363966",
+      "60241381",
+      "56514066",
+      "34287467",
+      "33931957",
+      "48186352",
+      "96556696",
+      "56414170"
+    ]
+  },
+  {
+    "question": "How much did we spend in total on shoes, across all invoices?",
+    "ground_truth": "3567.62",
+    "type": "category-spend",
+    "target_invoices": [
+      "70123184",
+      "99763738",
+      "80918693",
+      "29870205",
+      "16692901",
+      "10372826",
+      "37020779",
+      "75106829",
+      "45181097",
+      "48186352",
+      "38557956",
+      "76820481",
+      "60050779",
+      "27485789",
+      "24680775",
+      "78566408",
+      "39623428",
+      "57468195"
+    ]
+  },
+  {
+    "question": "How much did we spend in total on Nintendo consoles and games, across all invoices?",
+    "ground_truth": "21913.89",
+    "type": "category-spend",
+    "target_invoices": [
+      "46405643",
+      "39760888",
+      "20653012",
+      "91966464",
+      "45802970",
+      "81296657",
+      "70372519",
+      "66700610",
+      "87280945",
+      "26110076",
+      "72677375",
+      "64480147",
+      "51686132",
+      "60860535",
+      "67113656",
+      "60907167",
+      "28688861",
+      "49923258",
+      "20385371"
+    ]
+  },
+  {
+    "question": "How much did we spend in total on desktop computers, across all invoices?",
+    "ground_truth": "44748.64",
+    "type": "category-spend",
+    "target_invoices": [
+      "58805260",
+      "19537372",
+      "41925448",
+      "51265939",
+      "83186249",
+      "76330023",
+      "48650328",
+      "43846862",
+      "43825047",
+      "65524700",
+      "18393770",
+      "20583097",
+      "80028090",
+      "19852419"
+    ]
+  },
+  {
+    "question": "How much did we spend in total on carpets and rugs, across all invoices?",
+    "ground_truth": "412590.73",
+    "type": "category-spend",
+    "target_invoices": [
+      "39280409",
+      "10823698",
+      "65507091",
+      "28590433",
+      "59482422",
+      "39390025",
+      "58162869",
+      "19136863",
+      "27216737",
+      "61619303",
+      "86602235",
+      "86883880",
+      "56282973",
+      "74322107",
+      "23706524",
+      "89098949",
+      "10817861",
+      "58097062",
+      "95894022",
+      "15226383",
+      "31137784",
+      "82087318",
+      "92627663",
+      "56414170",
+      "51089508",
+      "38631441",
+      "93035437"
+    ]
+  },
+  {
+    "question": "Which vendor sold the item \"6'x3' Black Marble Inlaid Dining Center Table Top Peacock Inlay Patio Decor E966\"?",
+    "ground_truth": "Smith, Anderson and Johnson",
+    "type": "item-lookup",
+    "target_invoices": [
+      "92034501"
+    ]
+  },
+  {
+    "question": "Which vendor sold the item \"PocketGo Bittboy v2 White Retro Video Game Portable Console - 3.5 IPS display\"?",
+    "ground_truth": "Smith and Sons",
+    "type": "item-lookup",
+    "target_invoices": [
+      "20653012"
+    ]
+  },
+  {
+    "question": "Which vendor sold the item \"Yilong 5.5'x8' Handwoven Silk Area Rugs Red Living Room Classic Carpets 1696\"?",
+    "ground_truth": "Pacheco-Booker",
+    "type": "item-lookup",
+    "target_invoices": [
+      "38631441"
+    ]
+  },
+  {
+    "question": "Which vendor sold the item \"25 Inches Black Marble Center Table Top with Multi Stones Coffee Table for Home\"?",
+    "ground_truth": "Smith, Anderson and Johnson",
+    "type": "item-lookup",
+    "target_invoices": [
+      "92034501"
+    ]
+  },
+  {
+    "question": "Which vendor sold the item \"Dell Core 2 Duo Desktop Computer I Windows XP Pro I 4GB I 500GB\"?",
+    "ground_truth": "Jacobs-Curtis",
+    "type": "item-lookup",
+    "target_invoices": [
+      "83186249"
+    ]
+  },
+  {
+    "question": "Which vendor sold the item \"5'x2' Marble White Center Table Top With 18\" Tall Stand Pauashell Inlay Art Deco\"?",
+    "ground_truth": "Mccarty-Mcgee",
+    "type": "item-lookup",
+    "target_invoices": [
+      "80036269"
+    ]
+  },
+  {
+    "question": "What quantity of \"Nintendo Switch Gaming Console W/ Neon Blue & Red Controllers,Carry Case,Cable\" was purchased on invoice 49923258?",
+    "ground_truth": "2",
+    "type": "line-item",
+    "target_invoices": [
+      "49923258"
+    ]
+  },
+  {
+    "question": "What quantity of \"a pair of wine glasses drawer 1\" was purchased on invoice 98151772?",
+    "ground_truth": "1",
+    "type": "line-item",
+    "target_invoices": [
+      "98151772"
+    ]
+  },
+  {
+    "question": "What quantity of \"NEW TOMMY HILFIGER RED WHITE BLUE #5 COLOR BLOCK BEACH SANDALS BOYS KIDS 8/9\" was purchased on invoice 10372826?",
+    "ground_truth": "5",
+    "type": "line-item",
+    "target_invoices": [
+      "10372826"
+    ]
+  },
+  {
+    "question": "What quantity of \"Nike SB Dunk High X Concepts Kids Size 3 Ugly Sweater 2017 Pre School A01557-446\" was purchased on invoice 43417184?",
+    "ground_truth": "2",
+    "type": "line-item",
+    "target_invoices": [
+      "43417184"
+    ]
+  },
+  {
+    "question": "What quantity of \"Sperry Top-Sider Boys Toddlers Lace Tie Boat Shoes Brown 13M\" was purchased on invoice 37020779?",
+    "ground_truth": "1",
+    "type": "line-item",
+    "target_invoices": [
+      "37020779"
+    ]
+  },
+  {
+    "question": "What quantity of \"LAUREN RALPH LAUREN Womens Landette V-Neck A-Line Dress Size 6 NWT $200\" was purchased on invoice 96556696?",
+    "ground_truth": "4",
+    "type": "line-item",
+    "target_invoices": [
+      "96556696"
+    ]
+  }
+]

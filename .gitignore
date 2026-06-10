@@ -1,9 +1,7 @@
 .env
-ddd
-lol.ipynb
-processed_data.json
-prepare_db.ipynb
+__pycache__/
 /output/
 /images/
 /supabase/
-*.md
+*.log
+.DS_Store

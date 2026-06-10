@@ -1,207 +1,191 @@
 """
-Ragas evaluation wired to the real pipeline.
+Ragas evaluation + judge-free retrieval metrics.
 
-Key principle: the STORED / RETRIEVED content is OCR-noisy, but the ground-truth
-ANSWERS come from the dataset's clean `parsed_data` — never from the OCR text — so
-OCR errors are not baked into the answer key. That measures the real question:
-can the system recover the correct value despite OCR noise?
+The eval set (eval_set.json, built by build_eval_set.py) comes from the clean
+parsed_data of the ingested invoices, so the answer key is never polluted by OCR
+noise. This script runs it: for each question, retrieve over the (OCR-noisy)
+chunks, write an answer, and score. Fails CI if faithfulness drops below the
+threshold.
 
-Flow:
-  1. Build an eval set from processed_data.json rows that have real OCR `result`.
-     For each, read the clean fields from `parsed_data` and form deterministic
-     (question, ground_truth) pairs (totals, seller, dates).
-  2. For each question, retrieve contexts from the live `chunks` table (pgvector,
-     same OpenAI embedding as ingest) and generate an answer with a small RAG prompt.
-  3. Score with ragas (faithfulness, answer_correctness, context_recall) + CI gate.
+Two measurement principles learned the hard way:
+- **Independent judge.** Letting gpt-5.4-mini judge its own answers inflated
+  answer_correctness (0.848 self-judged vs ~0.63 with an external judge). The
+  judge is deepseek-v4-pro and MUST stay fixed across versions, or the
+  version-to-version deltas mean nothing.
+- **Judge-free retrieval metrics.** Each eval row carries `target_invoices` (the
+  invoice whose chunk is needed). hit@5 / MRR are computed deterministically from
+  those — no LLM, no noise — which makes them the cleanest before/after signal
+  for retrieval changes (hybrid search, reranker).
 
-    python evaluate_ragas.py --build 50   # build eval_set.json from 50 OCR'd rows
-    python evaluate_ragas.py              # evaluate using eval_set.json
+    python evaluate_ragas.py --limit 8                      # cheap smoke run
+    python evaluate_ragas.py --save evals/v0-baseline.json  # full + snapshot
 
-Needs a populated DB (run prepare_db.ipynb first) and OPEN_AI_API in .env.
+Needs a populated DB (prepare_db.ipynb), OPEN_AI_API + DEEPSEEK_API_KEY in .env.
 """
 
 import os
-import ast
+import re
+import sys
 import json
+import types
 import argparse
+import datetime
+import subprocess
 
 from dotenv import load_dotenv
 
 load_dotenv()
-# ragas / langchain look for OPENAI_API_KEY; mirror our project's var onto it.
-os.environ.setdefault("OPENAI_API_KEY", os.getenv("OPEN_AI_API", ""))
+os.environ.setdefault("OPENAI_API_KEY", os.getenv("OPEN_AI_API", ""))   # ragas reads this
 
-EVAL_SET_PATH = "eval_set.json"
-ANSWER_MODEL = "gpt-4o-mini"     # generates the RAG answer at eval time
-QA_GEN_MODEL = "gpt-4o-mini"     # generates the eval questions from clean parsed_data
-FAITHFULNESS_THRESHOLD = 0.8
+# Compat shim: ragas (<=0.4.3) imports ChatVertexAI from a legacy module that
+# langchain-community 0.4 removed. It's only used in an isinstance() capability
+# check (we never pass a VertexAI model), so an empty stub class is safe.
+_vertex = types.ModuleType("langchain_community.chat_models.vertexai")
+_vertex.ChatVertexAI = type("ChatVertexAI", (), {})
+sys.modules.setdefault("langchain_community.chat_models.vertexai", _vertex)
 
+from datasets import Dataset
+from ragas import evaluate
+from ragas.metrics import faithfulness, answer_correctness, context_recall
+from langchain_openai import OpenAIEmbeddings
+from langchain_deepseek import ChatDeepSeek
+from openai import OpenAI
 
-def _parse_fields(rec: dict) -> dict | None:
-    """Pull the clean ground-truth dict (header/items/summary) out of a
-    processed_data.json record's `parsed_data` (JSON whose 'json' value is a
-    python-dict-literal string using single quotes)."""
-    try:
-        pd_obj = json.loads(rec["parsed_data"])
-        return ast.literal_eval(pd_obj["json"])
-    except Exception:
-        return None
+from db import get_conn, embed_query
 
-
-def _deterministic_qa(fields: dict, inv: str) -> list[dict]:
-    """Template QA pairs straight from the clean fields — cheap, no LLM, fully grounded."""
-    header, summary = fields.get("header", {}), fields.get("summary", {})
-    rows = []
-    if summary.get("total_gross_worth"):
-        rows.append({"question": f"What is the total gross worth of invoice {inv}?",
-                     "ground_truth": str(summary["total_gross_worth"])})
-    if header.get("seller"):
-        rows.append({"question": f"Who is the seller on invoice {inv}?",
-                     "ground_truth": header["seller"].split("\n")[0].strip()})
-    return rows
+ANSWER_MODEL = "gpt-5.4-mini"      # model that writes the RAG answer
+JUDGE_MODEL = "deepseek-v4-pro"    # INDEPENDENT judge — never the answer model
+THRESHOLD = 0.8                    # CI gate on average faithfulness
 
 
-def llm_generate_qa(fields: dict, inv: str, per_invoice: int = 3) -> list[dict]:
-    """Ask the LLM to write natural, varied questions whose answers are fully
-    determined by the CLEAN invoice fields. The answer key therefore comes from
-    ground truth, never from OCR text — OCR errors can't pollute it. Each question
-    must mention the invoice number so retrieval can find the right document."""
-    from openai import OpenAI
-    client = OpenAI(api_key=os.getenv("OPEN_AI_API"))
-    prompt = (
-        "You are building an evaluation set for an invoice question-answering system.\n"
-        f"Given the STRUCTURED invoice data below (the ground truth), write {per_invoice} "
-        "diverse natural-language questions a user might ask about THIS invoice, each with a "
-        "short exact answer taken directly from the data. Vary the fields you ask about "
-        "(totals, VAT/tax, dates, seller, buyer, a specific line item). "
-        f"Every question MUST mention invoice number {inv} so it is unambiguous. "
-        'Return strict JSON: {"qa": [{"question": "...", "answer": "..."}]}\n\n'
-        f"Invoice data:\n{json.dumps(fields, ensure_ascii=False)[:4000]}"
-    )
-    resp = client.chat.completions.create(
-        model=QA_GEN_MODEL,
-        response_format={"type": "json_object"},
-        messages=[{"role": "user", "content": prompt}],
-    )
-    try:
-        qa = json.loads(resp.choices[0].message.content).get("qa", [])
-    except Exception:
-        return []
-    return [{"question": x["question"], "ground_truth": str(x["answer"])}
-            for x in qa if x.get("question") and x.get("answer") is not None]
-
-
-def build_eval_set(n_invoices: int, per_invoice: int = 3, use_llm: bool = True) -> list[dict]:
-    """Build (question, ground_truth) pairs from CLEAN parsed_data, using only rows
-    that actually have OCR `result` (so retrieval at eval time runs over noisy text)."""
-    with open("processed_data.json") as f:
-        datas = json.load(f)
-
-    eval_rows, used = [], 0
-    for rec in datas:
-        if used >= n_invoices:
-            break
-        if not rec.get("result"):
-            continue
-        fields = _parse_fields(rec)
-        inv = (fields or {}).get("header", {}).get("invoice_no")
-        if not fields or not inv:
-            continue
-        rows = llm_generate_qa(fields, inv, per_invoice) if use_llm else _deterministic_qa(fields, inv)
-        eval_rows.extend(rows)
-        used += 1
-
-    with open(EVAL_SET_PATH, "w") as f:
-        json.dump(eval_rows, f, indent=2)
-    print(f"Built {len(eval_rows)} eval pairs from {used} invoices "
-          f"({'LLM' if use_llm else 'deterministic'}) -> {EVAL_SET_PATH}")
-    return eval_rows
-
-
-def retrieve_contexts(question: str, k: int = 5) -> list[str]:
-    """Real retrieval: embed the query with the SAME OpenAI model used at ingest,
-    then cosine-search the live chunks table."""
-    from db import get_conn, embed_query
+def retrieve(question: str, k: int = 5) -> list[tuple[str | None, str]]:
+    """Hybrid retrieval -> [(invoice_number, content), ...]. Embeddings are nearly
+    blind to digit strings — measured 0/15 top-5 hit rate for "invoice 53737787"-style
+    questions with pure vector search, because every chunk has the same shape and only
+    the number differs. So: exact invoice-number match first, then vector fills."""
     qv = embed_query(question)
     with get_conn() as conn, conn.cursor() as cur:
-        cur.execute(
-            "select content from chunks order by embedding <=> %s limit %s", (qv, k)
-        )
-        return [r[0] for r in cur.fetchall()]
+        exact = []
+        for num in re.findall(r"\b\d{4,}\b", question):
+            cur.execute("select invoice_number, content from chunks where invoice_number = %s", (num,))
+            exact += cur.fetchall()
+        cur.execute("select invoice_number, content from chunks order by embedding <=> %s::vector limit %s",
+                    (qv, k))
+        vect = cur.fetchall()
+    seen, out = set(), []
+    for inv, c in exact + vect:
+        if c not in seen:
+            seen.add(c)
+            out.append((inv, c))
+    return out[:k]
 
 
-def generate_answer(question: str, contexts: list[str]) -> str:
-    """Small RAG answer over the retrieved (OCR-noisy) contexts."""
-    from openai import OpenAI
+def answer(question: str, contexts: list[str]) -> str:
+    ctx = "\n---\n".join(contexts) or "(no context)"
     client = OpenAI(api_key=os.getenv("OPEN_AI_API"))
-    ctx = "\n---\n".join(contexts) if contexts else "(no context retrieved)"
     resp = client.chat.completions.create(
         model=ANSWER_MODEL,
-        messages=[{
-            "role": "user",
-            "content": f"Answer using only the context. Be concise.\n\nContext:\n{ctx}\n\nQuestion: {question}",
-        }],
+        messages=[{"role": "user",
+                   "content": f"Answer using only the context. Be concise.\n\nContext:\n{ctx}\n\nQuestion: {question}"}],
     )
     return resp.choices[0].message.content.strip()
 
 
-def run_evaluation():
-    from datasets import Dataset
-    from ragas import evaluate
-    from ragas.metrics import faithfulness, answer_correctness, context_recall
+def retrieval_rank(retrieved_invoices: list[str | None], targets: list[str]) -> int | None:
+    """1-based rank of the first retrieved chunk whose invoice is a target, else None.
+    hit@k = rank is not None; MRR uses 1/rank. Matching is on the OCR-extracted
+    invoice_number column — if extraction garbled the number, that's a real miss."""
+    tset = set(targets)
+    for pos, inv in enumerate(retrieved_invoices, start=1):
+        if inv in tset:
+            return pos
+    return None
 
-    if not os.path.exists(EVAL_SET_PATH):
-        raise FileNotFoundError(
-            f"{EVAL_SET_PATH} not found — run `python evaluate_ragas.py --build N` first."
-        )
-    with open(EVAL_SET_PATH) as f:
-        eval_rows = json.load(f)
 
-    questions, contexts, answers, truths = [], [], [], []
-    for row in eval_rows:
-        q = row["question"]
-        ctx = retrieve_contexts(q)
-        questions.append(q)
-        contexts.append(ctx)
-        answers.append(generate_answer(q, ctx))
-        truths.append(row["ground_truth"])
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--limit", type=int, default=None,
+                    help="score only the first N questions (cheap smoke run)")
+    ap.add_argument("--save", default=None,
+                    help="write a versioned snapshot JSON (e.g. evals/v0-baseline.json)")
+    args = ap.parse_args()
 
-    dataset = Dataset.from_dict({
-        "question": questions,
-        "contexts": contexts,
-        "answer": answers,
-        "ground_truth": truths,
+    with open("eval_set.json") as f:
+        rows = json.load(f)
+    if args.limit:
+        rows = rows[:args.limit]
+
+    metas = [retrieve(r["question"]) for r in rows]
+    contexts = [[c for _, c in m] for m in metas]
+    answers = [answer(r["question"], c) for r, c in zip(rows, contexts)]
+    ranks = [retrieval_rank([inv for inv, _ in m], r.get("target_invoices", []))
+             for m, r in zip(metas, rows)]
+
+    data = Dataset.from_dict({
+        "question":     [r["question"] for r in rows],
+        "contexts":     contexts,
+        "answer":       answers,
+        "ground_truth": [r["ground_truth"] for r in rows],
     })
 
-    print(f"Starting Ragas evaluation on {len(questions)} questions...")
+    print(f"Scoring {len(rows)} questions with Ragas (judge: {JUDGE_MODEL})...")
+    # Pass the judge LLM + embeddings explicitly: ragas 0.4's default embedding
+    # factory builds a sync client where the metrics await an async one, so
+    # answer_correctness silently fails (NaN) without these.
     score = evaluate(
-        dataset,
+        data,
         metrics=[faithfulness, answer_correctness, context_recall],
-        in_ci=True,
+        llm=ChatDeepSeek(model=JUDGE_MODEL, temperature=0),
+        embeddings=OpenAIEmbeddings(model="text-embedding-3-small"),
     )
-
     df = score.to_pandas()
-    print("\n--- Evaluation Results ---")
+    df["type"] = [r["type"] for r in rows]
+    df["hit@5"] = [r is not None for r in ranks]
+    df["rr"] = [1.0 / r if r else 0.0 for r in ranks]
     print(df)
 
-    avg_faithfulness = df["faithfulness"].mean()
-    print(f"\nAverage Faithfulness Score: {avg_faithfulness}")
-    if avg_faithfulness < FAITHFULNESS_THRESHOLD:
-        raise ValueError(
-            f"Deployment halted: faithfulness {avg_faithfulness:.3f} < {FAITHFULNESS_THRESHOLD}."
-        )
+    metric_cols = ["faithfulness", "answer_correctness", "context_recall", "hit@5", "rr"]
+    headline = {m: round(float(df[m].mean()), 3) for m in metric_cols}
+    per_type = {t: {m: round(float(g[m].mean()), 3) for m in metric_cols}
+                for t, g in df.groupby("type")}
+
+    print("\n== headline ==")
+    for m, v in headline.items():
+        print(f"  {m:>20}: {v:.3f}")
+    print("\n== by question type ==")
+    for t, ms in per_type.items():
+        print(f"  {t:<15} " + "  ".join(f"{m}={v:.3f}" for m, v in ms.items()))
+
+    if args.save:
+        git = subprocess.run(["git", "describe", "--always", "--dirty"],
+                             capture_output=True, text=True).stdout.strip()
+        snapshot = {
+            "version": os.path.splitext(os.path.basename(args.save))[0],
+            "git": git,
+            "date": datetime.date.today().isoformat(),
+            "answer_model": ANSWER_MODEL,
+            "judge_model": JUDGE_MODEL,
+            "n_questions": len(rows),
+            "headline": headline,
+            "per_type": per_type,
+            "per_question": [
+                {"question": r["question"], "type": r["type"],
+                 "ground_truth": r["ground_truth"], "answer": a,
+                 "rank": rank,
+                 **{m: (None if df.loc[i, m] != df.loc[i, m] else round(float(df.loc[i, m]), 3))
+                    for m in ("faithfulness", "answer_correctness", "context_recall")}}
+                for i, (r, a, rank) in enumerate(zip(rows, answers, ranks))
+            ],
+        }
+        os.makedirs(os.path.dirname(args.save) or ".", exist_ok=True)
+        with open(args.save, "w") as f:
+            json.dump(snapshot, f, indent=2)
+        print(f"\nsnapshot -> {args.save}")
+
+    avg = df["faithfulness"].mean()
+    if avg < THRESHOLD:
+        raise SystemExit(f"FAIL: faithfulness {avg:.3f} < {THRESHOLD}")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--build", type=int, default=0, metavar="N",
-                        help="(Re)build eval_set.json from N OCR'd invoices, then exit.")
-    parser.add_argument("--per", type=int, default=3,
-                        help="Questions per invoice when building (LLM mode).")
-    parser.add_argument("--deterministic", action="store_true",
-                        help="Use template questions instead of the LLM generator.")
-    args = parser.parse_args()
-    if args.build:
-        build_eval_set(args.build, per_invoice=args.per, use_llm=not args.deterministic)
-    else:
-        run_evaluation()
+    main()

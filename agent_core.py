@@ -5,13 +5,15 @@ This is the reusable heart that BOTH the document agent and the PR assistant
 sit on. The agent loop and the tool interface never change; only the tool
 bodies (and later, where they read data from) do.
 
-Run it (needs GEMINI_KEY + SUPABASE_URI + OPEN_AI_API in .env, and a populated DB —
-run `python ingest.py` for the smoke set or prepare_db.ipynb for the real data):
+Run it (needs SUPABASE_URI + OPEN_AI_API + DEEPSEEK_API_KEY in .env, and a populated DB —
+seed it with prepare_db.ipynb, which calls pipeline.ingest_document):
     python agent_core.py
 """
 
 from langchain_core.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
+from langchain_deepseek import ChatDeepSeek
 # from langchain_anthropic import ChatAnthropic
 from langgraph.graph import StateGraph, START, MessagesState
 from langgraph.prebuilt import ToolNode, tools_condition
@@ -20,7 +22,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-api_key = os.getenv('GEMINI_KEY')
+api_key = os.getenv('OPEN_AI_API')
+os.environ.setdefault("DEEPSEEK_API_KEY", os.getenv("DEEPSEEK_API_KEY", "")) 
 # --- 1. TOOLS ----------------------------------------------------------------
 # The tool seam: identical names/docstrings/signatures to the old stubs, but the
 # bodies now read live Supabase data on the `documents` schema. The agent loop,
@@ -32,15 +35,24 @@ from tools import TOOLS
 # bind_tools() hands the tool schemas to the model so it CAN request a call.
 # Important: the model never runs a tool. It only emits a request ("call
 # query_fields with vendor='Acme'"); YOUR code (the ToolNode below) runs it.
-# llm = ChatAnthropic(model="claude-opus-4-8", temperature=0)
-# llm = ChatAnthropic(model="claude-haiku-4-5-20251001", temperature=0)
-llm = ChatGoogleGenerativeAI(
-    model="gemini-3.5-flash",          # valid current id (the dubious gemini-3.5-flash isn't)
-    temperature=0,
-    max_retries=2,
-    google_api_key=api_key,
-)
 
+# llm = ChatGoogleGenerativeAI(
+#     model="gemini-3.5-flash",          # valid current id (the dubious gemini-3.5-flash isn't)
+#     temperature=0,
+#     max_retries=2,
+#     google_api_key=api_key,
+# )
+# llm = ChatOpenAI(
+#     model="gpt-5.4-mini",
+#     api_key=api_key,
+#     temperature=0.0,
+#     max_tokens=150
+# )
+llm = ChatDeepSeek(
+    model="deepseek-v4-flash",
+    temperature=0,
+    max_tokens=1024
+)
 llm_with_tools = llm.bind_tools(TOOLS)
 
 
@@ -69,9 +81,28 @@ builder.add_edge("tools", "agent")           # after a tool runs, loop back to t
 graph = builder.compile()
 
 
-# --- 5. RUN IT ---------------------------------------------------------------
+# --- 5. ENTRY POINT FOR THE API ----------------------------------------------
+def answer(question: str) -> dict:
+    """Run the agent on one question. Returns the final answer plus a structured
+    trace of the ReAct loop — each tool call the model requested paired (by
+    tool_call_id) with the result our code fed back. The web demo renders this
+    trace so visitors can SEE the loop; `sources` stays for back-compat."""
+    from langchain_core.messages import AIMessage, ToolMessage
+    msgs = graph.invoke({"messages": [HumanMessage(content=question)]})["messages"]
+    final = next((m.content for m in reversed(msgs)
+                  if isinstance(m, AIMessage) and m.content), "")
+    results = {m.tool_call_id: m.content for m in msgs if isinstance(m, ToolMessage)}
+    trace = [{"tool": tc["name"], "args": tc["args"], "result": results.get(tc["id"], "")}
+             for m in msgs if isinstance(m, AIMessage)
+             for tc in (m.tool_calls or [])]
+    return {"answer": final,
+            "trace": trace,
+            "sources": [t["result"] for t in trace]}
+
+
+# --- 6. RUN IT (manual check) ------------------------------------------------
 if __name__ == "__main__":
-    question = "How much did we spend with Acme, and is invoice INV-1002 consistent?"
+    question = "How much did we spend with Hanson PLC?. and what items did we buy"
     result = graph.invoke({"messages": [HumanMessage(content=question)]})
     # Print every message so you can SEE the loop: the question, the model's
     # tool-call requests, the tool results, then the final answer.
