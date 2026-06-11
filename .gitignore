@@ -5,3 +5,4 @@ __pycache__/
 /supabase/
 *.log
 .DS_Store
+/Portfolio website design/
