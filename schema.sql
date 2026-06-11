@@ -38,7 +38,11 @@ CREATE TABLE chunks (
     document_id    INT REFERENCES documents(id) ON DELETE CASCADE,
     invoice_number VARCHAR(100),
     content        TEXT NOT NULL,
-    embedding      vector(1536)
+    embedding      vector(1536),
+    -- v1-hybrid: lexical complement to the embedding. GENERATED = Postgres
+    -- maintains it on every write; indexes words AND digit-strings (invoice
+    -- numbers), which embeddings are nearly blind to. See migrations/001.
+    content_tsv    tsvector GENERATED ALWAYS AS (to_tsvector('english', content)) STORED
 );
 
 -- Cosine HNSW index for fast nearest-neighbour at query time.
@@ -46,6 +50,10 @@ CREATE TABLE chunks (
 -- MUST use the same embedding model (1536).
 CREATE INDEX IF NOT EXISTS chunks_embedding_hnsw
     ON chunks USING hnsw (embedding vector_cosine_ops);
+
+-- GIN inverted index over the tsvector — makes full-text @@ matches fast.
+CREATE INDEX IF NOT EXISTS chunks_content_tsv_gin
+    ON chunks USING gin (content_tsv);
 
 -- Helps exact/aggregate vendor filters used by the agent's query_fields tool.
 CREATE INDEX IF NOT EXISTS documents_vendor_idx ON documents (vendor);

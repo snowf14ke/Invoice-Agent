@@ -24,7 +24,6 @@ Needs a populated DB (prepare_db.ipynb), OPEN_AI_API + DEEPSEEK_API_KEY in .env.
 """
 
 import os
-import re
 import sys
 import json
 import types
@@ -51,33 +50,16 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_deepseek import ChatDeepSeek
 from openai import OpenAI
 
-from db import get_conn, embed_query
+# v1-hybrid: retrieval moved to retrieval.py — ONE function shared with the
+# agent's search_text tool, so the eval scores exactly what ships. The old
+# regex invoice-number fast-path that lived here is gone: full-text search
+# indexes digit strings, so exact identifiers are handled by the retriever
+# itself instead of an eval-only hack (which the agent never benefited from).
+from retrieval import retrieve
 
 ANSWER_MODEL = "gpt-5.4-mini"      # model that writes the RAG answer
 JUDGE_MODEL = "deepseek-v4-pro"    # INDEPENDENT judge — never the answer model
 THRESHOLD = 0.8                    # CI gate on average faithfulness
-
-
-def retrieve(question: str, k: int = 5) -> list[tuple[str | None, str]]:
-    """Hybrid retrieval -> [(invoice_number, content), ...]. Embeddings are nearly
-    blind to digit strings — measured 0/15 top-5 hit rate for "invoice 53737787"-style
-    questions with pure vector search, because every chunk has the same shape and only
-    the number differs. So: exact invoice-number match first, then vector fills."""
-    qv = embed_query(question)
-    with get_conn() as conn, conn.cursor() as cur:
-        exact = []
-        for num in re.findall(r"\b\d{4,}\b", question):
-            cur.execute("select invoice_number, content from chunks where invoice_number = %s", (num,))
-            exact += cur.fetchall()
-        cur.execute("select invoice_number, content from chunks order by embedding <=> %s::vector limit %s",
-                    (qv, k))
-        vect = cur.fetchall()
-    seen, out = set(), []
-    for inv, c in exact + vect:
-        if c not in seen:
-            seen.add(c)
-            out.append((inv, c))
-    return out[:k]
 
 
 def answer(question: str, contexts: list[str]) -> str:

@@ -10,7 +10,8 @@ In agent_core.py, delete the three @tool stubs and `TOOLS = [...]`, then add:
 
 from langchain_core.tools import tool
 
-from db import get_conn, embed_query
+from db import get_conn
+from retrieval import retrieve
 
 
 @tool
@@ -40,18 +41,12 @@ def query_fields(vendor: str | None = None, min_total: float | None = None) -> s
 
 @tool
 def search_text(query: str, k: int = 5) -> str:
-    """Semantically search the document text for passages relevant to a query.
+    """Search the document text for passages relevant to a query.
     Use for fuzzy / content questions like 'what does it say about refunds?'."""
-    query_vec = embed_query(query)
-    with get_conn() as conn, conn.cursor() as cur:
-        # <=> is pgvector's cosine-distance operator; smaller = more similar.
-        # ::vector — psycopg sends a Python list as float8[], and no <=> operator
-        # exists for (vector, float8[]); the explicit cast resolves it.
-        cur.execute(
-            "select content from chunks order by embedding <=> %s::vector limit %s",
-            (query_vec, k),
-        )
-        hits = [r[0] for r in cur.fetchall()]
+    # v1-hybrid: delegates to the ONE shared retrieve() (FTS + vector + RRF +
+    # floor) — the same function the eval scores, so tool and eval can't drift.
+    # The floor means this can return fewer than k hits, or none at all.
+    hits = [content for _inv, content in retrieve(query, k)]
     return "\n".join(hits) if hits else "No relevant passages found."
 
 
