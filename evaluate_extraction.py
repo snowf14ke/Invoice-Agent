@@ -21,6 +21,7 @@ import os
 import ast
 import json
 import argparse
+from datetime import date as _date_t
 from decimal import Decimal
 
 from dotenv import load_dotenv
@@ -33,6 +34,14 @@ load_dotenv()
 
 FIELDS = ["invoice_no", "invoice_date", "seller", "total_net_worth", "total_vat",
           "total_gross_worth", "n_items"]
+
+# USD per 1M tokens (input, output) — OpenAI list prices, checked 2026-06-11.
+# Models not listed here still run; their $ column just comes out as None.
+PRICING = {
+    "gpt-5.4-nano": (0.20, 1.25),
+    "gpt-5.4-mini": (0.75, 4.50),
+}
+PRICING_NOTE = "OpenAI list prices as of 2026-06-11, no batch/caching discounts"
 
 
 # ---------- normalization (so "$ 212,09" and "212.09" compare equal) ----------
@@ -102,18 +111,20 @@ def in_ocr(field: str, gt_val, ocr_text: str) -> bool:
     return str(gt_val) in ocr                     # invoice_no
 
 
-def extract(client, model: str, ocr_text: str) -> Invoice | None:
+def extract(client, model: str, ocr_text: str):
+    """-> (Invoice | None, usage | None) — usage carries prompt/completion token counts."""
     try:
-        return client.chat.completions.create(
+        inv, completion = client.chat.completions.create_with_completion(
             model=model, response_model=Invoice,
             messages=[{"role": "user",
                        "content": f"Extract the invoice/receipt fields from this OCR text (leave missing fields null):\n\n{ocr_text}"}],
         )
+        return inv, completion.usage
     except Exception:
-        return None
+        return None, None
 
 
-def run(model: str, records: list) -> None:
+def run(model: str, records: list) -> dict:
     client = instructor.from_openai(OpenAI(api_key=os.getenv("OPEN_AI_API")))
     # counters
     correct = {f: 0 for f in FIELDS}
@@ -121,10 +132,14 @@ def run(model: str, records: list) -> None:
     ocr_miss = {f: 0 for f in FIELDS}
     ext_miss = {f: 0 for f in FIELDS}
     extract_failures = 0
+    prompt_tokens = completion_tokens = 0
 
     for rec in records:
         gt = gt_values(ast.literal_eval(json.loads(rec["parsed_data"])["json"]))
-        inv = extract(client, model, rec["result"])
+        inv, usage = extract(client, model, rec["result"])
+        if usage is not None:
+            prompt_tokens += usage.prompt_tokens
+            completion_tokens += usage.completion_tokens
         if inv is None:
             extract_failures += 1
             continue
@@ -153,6 +168,25 @@ def run(model: str, records: list) -> None:
     if wrong:
         print(f"  of {wrong} wrong fields: {tot_ocr} ({100*tot_ocr/wrong:.0f}%) OCR's fault, "
               f"{tot_ext} ({100*tot_ext/wrong:.0f}%) extractor's fault")
+
+    usd_per_1k = None
+    if model in PRICING and records:
+        in_p, out_p = PRICING[model]
+        total_usd = (prompt_tokens * in_p + completion_tokens * out_p) / 1e6
+        usd_per_1k = round(total_usd / len(records) * 1000, 2)
+        print(f"  tokens: {prompt_tokens} in / {completion_tokens} out -> ${usd_per_1k}/1k docs")
+
+    return {
+        "model": model,
+        "overall_accuracy": round(tot_c / tot_p, 3) if tot_p else 0.0,
+        "per_field": {f: round(correct[f] / present[f], 3) if present[f] else 0.0 for f in FIELDS},
+        "ocr_miss": tot_ocr,
+        "ext_miss": tot_ext,
+        "extract_failures": extract_failures,
+        "prompt_tokens": prompt_tokens,
+        "completion_tokens": completion_tokens,
+        "usd_per_1k_docs": usd_per_1k,
+    }
 
 
 def load_records(n: int) -> list:
@@ -187,6 +221,8 @@ def main():
     ap.add_argument("--n", type=int, default=60, help="number of seeded documents to grade")
     ap.add_argument("--models", nargs="+", default=["gpt-5.4-nano"],
                     help="one or more extraction models to compare")
+    ap.add_argument("--save", metavar="PATH",
+                    help="write the comparison as JSON (e.g. evals/extraction-models.json)")
     args = ap.parse_args()
 
     records = load_records(args.n)
@@ -194,8 +230,19 @@ def main():
         raise SystemExit("No seeded documents found — run the notebook seeder (pipeline) first.")
     print(f"grading {len(records)} seeded documents against parsed_data ground truth")
 
-    for model in args.models:
-        run(model, records)
+    results = [run(model, records) for model in args.models]
+
+    if args.save:
+        payload = {
+            "kind": "extraction-models",
+            "date": _date_t.today().isoformat(),
+            "n_docs": len(records),
+            "pricing_note": PRICING_NOTE,
+            "models": results,
+        }
+        with open(args.save, "w") as f:
+            json.dump(payload, f, indent=2)
+        print(f"saved -> {args.save}")
 
 
 if __name__ == "__main__":

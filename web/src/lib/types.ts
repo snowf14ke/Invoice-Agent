@@ -1,5 +1,24 @@
 // Shapes of the JSON artifacts the Python side produces.
 
+/** evals/extraction-models.json — written by evaluate_extraction.py --save */
+export type ExtractionComparison = {
+  kind: "extraction-models";
+  date: string;
+  n_docs: number;
+  pricing_note: string;
+  models: {
+    model: string;
+    overall_accuracy: number;
+    per_field: Record<string, number>;
+    ocr_miss: number;
+    ext_miss: number;
+    extract_failures: number;
+    prompt_tokens: number;
+    completion_tokens: number;
+    usd_per_1k_docs: number | null;
+  }[];
+};
+
 /** evals/vN-*.json — written by evaluate_ragas.py --save */
 export type Snapshot = {
   version: string;

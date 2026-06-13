@@ -43,20 +43,20 @@ export default function DocsGallery() {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm text-mist-400">
           The corpus the agent answers from — latest 12 of the ingested documents.
         </p>
         <button
           onClick={ingest}
           disabled={ingesting}
-          className="rounded-lg border border-emerald-500/50 px-3.5 py-2 text-sm text-emerald-400 transition-colors hover:bg-emerald-500/10 disabled:opacity-50"
+          className="rounded-lg border border-azure-400/50 px-3.5 py-2 text-sm text-azure-300 transition-colors hover:bg-azure-500/10 disabled:opacity-50"
         >
           {ingesting ? "Ingesting…" : "Ingest a fresh document"}
         </button>
       </div>
 
       {notice && (
-        <div className="rounded-lg border border-zinc-700 bg-zinc-900/60 px-4 py-2.5 text-sm text-zinc-300">
+        <div className="panel px-4 py-2.5 text-sm text-mist-300">
           {notice}
         </div>
       )}
@@ -69,27 +69,30 @@ export default function DocsGallery() {
       {docs && (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {docs.map((d) => (
-            <div key={d.id} className="overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900/40">
+            <div
+              key={d.id}
+              className="group overflow-hidden rounded-lg border border-ink-700 bg-ink-850 transition-colors hover:border-azure-400/40"
+            >
               {d.image_url ? (
-                <div className="relative h-36 w-full bg-zinc-950">
+                <div className="relative h-36 w-full bg-ink-950">
                   <Image
                     src={d.image_url}
                     alt={`Invoice ${d.invoice_number ?? d.id}`}
                     fill
                     sizes="(max-width: 640px) 50vw, 25vw"
-                    className="object-cover object-top opacity-80"
+                    className="object-cover object-top opacity-80 transition-opacity group-hover:opacity-100"
                   />
                 </div>
               ) : (
-                <div className="flex h-36 items-center justify-center bg-zinc-950 text-xs text-zinc-600">
+                <div className="flex h-36 items-center justify-center bg-ink-950 text-xs text-mist-500">
                   no image
                 </div>
               )}
               <div className="space-y-0.5 p-2.5">
-                <div className="truncate text-xs font-medium text-zinc-200">
+                <div className="truncate text-xs font-medium text-mist-200">
                   {d.vendor ?? "Unknown vendor"}
                 </div>
-                <div className="flex justify-between font-mono text-[11px] text-zinc-500">
+                <div className="flex justify-between font-mono text-[11px] text-mist-500">
                   <span>#{d.invoice_number ?? "—"}</span>
                   <span>{d.total_gross_worth != null ? d.total_gross_worth.toFixed(2) : ""}</span>
                 </div>

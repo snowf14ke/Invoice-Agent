@@ -1,0 +1,46 @@
+{
+  "kind": "extraction-models",
+  "date": "2026-06-11",
+  "n_docs": 60,
+  "pricing_note": "OpenAI list prices as of 2026-06-11, no batch/caching discounts",
+  "models": [
+    {
+      "model": "gpt-5.4-nano",
+      "overall_accuracy": 0.799,
+      "per_field": {
+        "invoice_no": 0.983,
+        "invoice_date": 1.0,
+        "seller": 0.102,
+        "total_net_worth": 0.847,
+        "total_vat": 0.847,
+        "total_gross_worth": 0.845,
+        "n_items": 0.966
+      },
+      "ocr_miss": 26,
+      "ext_miss": 57,
+      "extract_failures": 0,
+      "prompt_tokens": 61879,
+      "completion_tokens": 23378,
+      "usd_per_1k_docs": 0.69
+    },
+    {
+      "model": "gpt-5.4-mini",
+      "overall_accuracy": 0.806,
+      "per_field": {
+        "invoice_no": 0.983,
+        "invoice_date": 1.0,
+        "seller": 0.051,
+        "total_net_worth": 0.864,
+        "total_vat": 0.881,
+        "total_gross_worth": 0.879,
+        "n_items": 0.983
+      },
+      "ocr_miss": 23,
+      "ext_miss": 57,
+      "extract_failures": 0,
+      "prompt_tokens": 61879,
+      "completion_tokens": 18894,
+      "usd_per_1k_docs": 2.19
+    }
+  ]
+}

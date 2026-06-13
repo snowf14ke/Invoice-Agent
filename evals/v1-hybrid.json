@@ -1,824 +1,824 @@
 {
-  "version": "v1-hybrid",
-  "git": "v0-baseline-dirty",
-  "date": "2026-06-11",
-  "answer_model": "gpt-5.4-mini",
-  "judge_model": "deepseek-v4-pro",
-  "n_questions": 77,
-  "headline": {
-    "faithfulness": 0.883,
-    "answer_correctness": 0.779,
-    "context_recall": 0.805,
-    "hit@5": 0.974,
-    "rr": 0.94
-  },
-  "per_type": {
-    "category-spend": {
-      "faithfulness": 0.0,
-      "answer_correctness": 0.086,
-      "context_recall": 0.0,
-      "hit@5": 1.0,
-      "rr": 1.0
-    },
-    "gross-worth": {
-      "faithfulness": 1.0,
-      "answer_correctness": 0.754,
-      "context_recall": 0.844,
-      "hit@5": 1.0,
-      "rr": 1.0
-    },
-    "item-lookup": {
-      "faithfulness": 0.667,
-      "answer_correctness": 0.682,
-      "context_recall": 0.667,
-      "hit@5": 0.667,
-      "rr": 0.236
-    },
-    "line-item": {
-      "faithfulness": 0.667,
-      "answer_correctness": 0.85,
-      "context_recall": 0.833,
-      "hit@5": 1.0,
-      "rr": 1.0
-    },
-    "seller": {
-      "faithfulness": 1.0,
-      "answer_correctness": 0.938,
-      "context_recall": 0.929,
-      "hit@5": 1.0,
-      "rr": 1.0
-    }
-  },
-  "per_question": [
-    {
-      "question": "Who is the seller on invoice 10372826?",
-      "type": "seller",
-      "ground_truth": "Graham, Briggs and Anderson",
-      "answer": "Graham, Briggs and Anderson",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 58162869?",
-      "type": "gross-worth",
-      "ground_truth": "$ 36 210,72",
-      "answer": "36210.72",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.854,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 61356291?",
-      "type": "seller",
-      "ground_truth": "Chapman, Kim and Green",
-      "answer": "Chapman, Kim and Green",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 69941787?",
-      "type": "gross-worth",
-      "ground_truth": "$35572,00",
-      "answer": "35572.00",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.878,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 23004223?",
-      "type": "gross-worth",
-      "ground_truth": "$ 450,54",
-      "answer": "450.54",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.905,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 99788357?",
-      "type": "seller",
-      "ground_truth": "Lee-Everett",
-      "answer": "Lee-Everett",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 91966464?",
-      "type": "seller",
-      "ground_truth": "Taylor and Sons",
-      "answer": "Taylor and Sons",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 42242778?",
-      "type": "seller",
-      "ground_truth": "Roberson and Sons",
-      "answer": "Roberson and Sons",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 81432357?",
-      "type": "seller",
-      "ground_truth": "Tran LLC",
-      "answer": "Tran LLC",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 54533510?",
-      "type": "seller",
-      "ground_truth": "Tucker Inc",
-      "answer": "Tucker Inc",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 61619303?",
-      "type": "gross-worth",
-      "ground_truth": "$1057,33",
-      "answer": "1057.33",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.864,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 64480147?",
-      "type": "gross-worth",
-      "ground_truth": "$3046,86",
-      "answer": "3046.86",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.877,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 60241381?",
-      "type": "seller",
-      "ground_truth": "Stevens-Black",
-      "answer": "Stevens-Black",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 45181097?",
-      "type": "seller",
-      "ground_truth": "Long, Alvarez and Mendoza",
-      "answer": "Long, Alvarez and Mendoza",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 61268082?",
-      "type": "gross-worth",
-      "ground_truth": "$ 14,00",
-      "answer": "14.00",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.906,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 78566408?",
-      "type": "gross-worth",
-      "ground_truth": "228,68",
-      "answer": "None",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.058,
-      "context_recall": 0.0
-    },
-    {
-      "question": "Who is the seller on invoice 43846862?",
-      "type": "seller",
-      "ground_truth": "Phillips PLC USCGC Harrington FPO AE",
-      "answer": "Phillips PLC",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.901,
-      "context_recall": 0.0
-    },
-    {
-      "question": "Who is the seller on invoice 70123184?",
-      "type": "seller",
-      "ground_truth": "Kelly, Hernandez and Vaughan",
-      "answer": "Kelly, Hernandez and Vaughan",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 27892893?",
-      "type": "seller",
-      "ground_truth": "Reeves-Campbel.",
-      "answer": "Reeves-Campbell",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.214,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 57468195?",
-      "type": "gross-worth",
-      "ground_truth": "$98,58",
-      "answer": "98.58",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.914,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 67113656?",
-      "type": "seller",
-      "ground_truth": "Henson-Cross",
-      "answer": "Henson-Cross",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 27216737?",
-      "type": "gross-worth",
-      "ground_truth": "$18 561,36",
-      "answer": "18561.36",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.861,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 75106829?",
-      "type": "gross-worth",
-      "ground_truth": "$ 354,15",
-      "answer": "354.15",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.876,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 92627663?",
-      "type": "seller",
-      "ground_truth": "Solis Group",
-      "answer": "Solis Group",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 92802196?",
-      "type": "gross-worth",
-      "ground_truth": "686,75",
-      "answer": "686.75",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.945,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 53737787?",
-      "type": "gross-worth",
-      "ground_truth": "$ 205,50",
-      "answer": "205.50",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.888,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 16692901?",
-      "type": "seller",
-      "ground_truth": "Jackson-Oliver",
-      "answer": "Jackson-Oliver",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 27485789?",
-      "type": "gross-worth",
-      "ground_truth": "$ 705,92",
-      "answer": "705.92",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.891,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 49923258?",
-      "type": "gross-worth",
-      "ground_truth": "$1182,50",
-      "answer": "1182.50",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.9,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 38248291?",
-      "type": "seller",
-      "ground_truth": "Campbell and Sons USNS Smith FPO AP",
-      "answer": "Campbell and Sons",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.148,
-      "context_recall": 0.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 56514066?",
-      "type": "gross-worth",
-      "ground_truth": "$ 49,38",
-      "answer": "49.38",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.891,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 16692901?",
-      "type": "gross-worth",
-      "ground_truth": "Total",
-      "answer": "79.13",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.082,
-      "context_recall": 0.0
-    },
-    {
-      "question": "Who is the seller on invoice 83613779?",
-      "type": "seller",
-      "ground_truth": "Larson-Grant",
-      "answer": "Larson-Grant",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 54569960?",
-      "type": "gross-worth",
-      "ground_truth": "$ 323,11",
-      "answer": "323.11",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.867,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 69087316?",
-      "type": "seller",
-      "ground_truth": "Simmons-Henry",
-      "answer": "Simmons-Henry",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 76999802?",
-      "type": "gross-worth",
-      "ground_truth": "$81661,14",
-      "answer": "None",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.05,
-      "context_recall": 0.0
-    },
-    {
-      "question": "Who is the seller on invoice 20385371?",
-      "type": "seller",
-      "ground_truth": "Hess and Sons",
-      "answer": "Hess and Sons",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 86602235?",
-      "type": "gross-worth",
-      "ground_truth": "$3729,94",
-      "answer": "339.09",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.122,
-      "context_recall": 0.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 76820481?",
-      "type": "gross-worth",
-      "ground_truth": "$ 117,04",
-      "answer": "117.04",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.888,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 76330023?",
-      "type": "seller",
-      "ground_truth": "Baker-Jackson",
-      "answer": "Baker-Jackson",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 82087318?",
-      "type": "gross-worth",
-      "ground_truth": "$ 12 119,61",
-      "answer": "None",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.047,
-      "context_recall": 0.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 61356291?",
-      "type": "gross-worth",
-      "ground_truth": "$ 212,09",
-      "answer": "212.09",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.889,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 26363966?",
-      "type": "seller",
-      "ground_truth": "Griffin, Cox and Day",
-      "answer": "Griffin, Cox and Day",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 60860535?",
-      "type": "seller",
-      "ground_truth": "Shields, Copeland and Gallegos",
-      "answer": "Shields, Copeland and Gallegos",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 10372826?",
-      "type": "gross-worth",
-      "ground_truth": "$ 276,60",
-      "answer": "276.6",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.87,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 61264237?",
-      "type": "gross-worth",
-      "ground_truth": "$ 288,15",
-      "answer": "288.15",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.874,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 57168813?",
-      "type": "gross-worth",
-      "ground_truth": "$ 19,77",
-      "answer": "19.77",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.643,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 46301857?",
-      "type": "gross-worth",
-      "ground_truth": "$65,29",
-      "answer": "65.29",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.9,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 59482422?",
-      "type": "gross-worth",
-      "ground_truth": "$ 934,31",
-      "answer": "934.31",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.897,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 99763738?",
-      "type": "gross-worth",
-      "ground_truth": "$403,25",
-      "answer": "403.25",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.897,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 43417184?",
-      "type": "gross-worth",
-      "ground_truth": "$ 339,79",
-      "answer": "339.79",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.911,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 15259432?",
-      "type": "seller",
-      "ground_truth": "Franklin, Buchanan and Reed",
-      "answer": "Franklin, Buchanan and Reed",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 80036269?",
-      "type": "gross-worth",
-      "ground_truth": "$79238,76",
-      "answer": "79238.76",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.905,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 10817861?",
-      "type": "seller",
-      "ground_truth": "Hughes-jones",
-      "answer": "Hughes-Jones",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.995,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 86883880?",
-      "type": "gross-worth",
-      "ground_truth": "$ 225,19",
-      "answer": "225.19",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.882,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 61268082?",
-      "type": "seller",
-      "ground_truth": "Henson, Mccarthy and Hart",
-      "answer": "Henson, Mccarthy and Hart",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What is the total gross worth of invoice 15700884?",
-      "type": "gross-worth",
-      "ground_truth": "$ 43,96",
-      "answer": "43.96",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.897,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 82087318?",
-      "type": "seller",
-      "ground_truth": "Hughes LLC",
-      "answer": "Hughes LLC",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 59482422?",
-      "type": "seller",
-      "ground_truth": "Avila-Espinoza",
-      "answer": "Avila-Espinoza",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Who is the seller on invoice 74322107?",
-      "type": "seller",
-      "ground_truth": "Davis-Obrien",
-      "answer": "Davis-Obrien",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "How much did we spend in total on dresses, across all invoices?",
-      "type": "category-spend",
-      "ground_truth": "4483.91",
-      "answer": "Total spent on dresses across all invoices: **$3,255.84**",
-      "rank": 1,
-      "faithfulness": 0.0,
-      "answer_correctness": 0.064,
-      "context_recall": 0.0
-    },
-    {
-      "question": "How much did we spend in total on shoes, across all invoices?",
-      "type": "category-spend",
-      "ground_truth": "3567.62",
-      "answer": "$2,038.35",
-      "rank": 1,
-      "faithfulness": 0.0,
-      "answer_correctness": 0.112,
-      "context_recall": 0.0
-    },
-    {
-      "question": "How much did we spend in total on Nintendo consoles and games, across all invoices?",
-      "type": "category-spend",
-      "ground_truth": "21913.89",
-      "answer": "Total spent on Nintendo consoles and games: **$3,614.53**",
-      "rank": 1,
-      "faithfulness": 0.0,
-      "answer_correctness": 0.074,
-      "context_recall": 0.0
-    },
-    {
-      "question": "How much did we spend in total on desktop computers, across all invoices?",
-      "type": "category-spend",
-      "ground_truth": "44748.64",
-      "answer": "Total spent on desktop computers across all invoices: **40,626.57**",
-      "rank": 1,
-      "faithfulness": 0.0,
-      "answer_correctness": 0.087,
-      "context_recall": 0.0
-    },
-    {
-      "question": "How much did we spend in total on carpets and rugs, across all invoices?",
-      "type": "category-spend",
-      "ground_truth": "412590.73",
-      "answer": "Total spent on carpets and rugs across all invoices: **50,080.99**.",
-      "rank": 1,
-      "faithfulness": 0.0,
-      "answer_correctness": 0.093,
-      "context_recall": 0.0
-    },
-    {
-      "question": "Which vendor sold the item \"6'x3' Black Marble Inlaid Dining Center Table Top Peacock Inlay Patio Decor E966\"?",
-      "type": "item-lookup",
-      "ground_truth": "Smith, Anderson and Johnson",
-      "answer": "Weber-Wagner",
-      "rank": null,
-      "faithfulness": 0.0,
-      "answer_correctness": 0.079,
-      "context_recall": 0.0
-    },
-    {
-      "question": "Which vendor sold the item \"PocketGo Bittboy v2 White Retro Video Game Portable Console - 3.5 IPS display\"?",
-      "type": "item-lookup",
-      "ground_truth": "Smith and Sons",
-      "answer": "Smith and Sons",
-      "rank": 2,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Which vendor sold the item \"Yilong 5.5'x8' Handwoven Silk Area Rugs Red Living Room Classic Carpets 1696\"?",
-      "type": "item-lookup",
-      "ground_truth": "Pacheco-Booker",
-      "answer": "Pacheco-Booker",
-      "rank": 4,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Which vendor sold the item \"25 Inches Black Marble Center Table Top with Multi Stones Coffee Table for Home\"?",
-      "type": "item-lookup",
-      "ground_truth": "Smith, Anderson and Johnson",
-      "answer": "No matching invoice item is shown for \u201c25 Inches Black Marble Center Table Top with Multi Stones Coffee Table for Home.\u201d",
-      "rank": null,
-      "faithfulness": 1.0,
-      "answer_correctness": 0.011,
-      "context_recall": 0.0
-    },
-    {
-      "question": "Which vendor sold the item \"Dell Core 2 Duo Desktop Computer I Windows XP Pro I 4GB I 500GB\"?",
-      "type": "item-lookup",
-      "ground_truth": "Jacobs-Curtis",
-      "answer": "Jacobs-Curtis",
-      "rank": 3,
-      "faithfulness": 0.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "Which vendor sold the item \"5'x2' Marble White Center Table Top With 18\" Tall Stand Pauashell Inlay Art Deco\"?",
-      "type": "item-lookup",
-      "ground_truth": "Mccarty-Mcgee",
-      "answer": "Mccarty-Mcgee",
-      "rank": 3,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What quantity of \"Nintendo Switch Gaming Console W/ Neon Blue & Red Controllers,Carry Case,Cable\" was purchased on invoice 49923258?",
-      "type": "line-item",
-      "ground_truth": "2",
-      "answer": "None",
-      "rank": 1,
-      "faithfulness": 0.0,
-      "answer_correctness": 0.102,
-      "context_recall": 0.0
-    },
-    {
-      "question": "What quantity of \"a pair of wine glasses drawer 1\" was purchased on invoice 98151772?",
-      "type": "line-item",
-      "ground_truth": "1",
-      "answer": "1",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What quantity of \"NEW TOMMY HILFIGER RED WHITE BLUE #5 COLOR BLOCK BEACH SANDALS BOYS KIDS 8/9\" was purchased on invoice 10372826?",
-      "type": "line-item",
-      "ground_truth": "5",
-      "answer": "5",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What quantity of \"Nike SB Dunk High X Concepts Kids Size 3 Ugly Sweater 2017 Pre School A01557-446\" was purchased on invoice 43417184?",
-      "type": "line-item",
-      "ground_truth": "2",
-      "answer": "2",
-      "rank": 1,
-      "faithfulness": 0.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What quantity of \"Sperry Top-Sider Boys Toddlers Lace Tie Boat Shoes Brown 13M\" was purchased on invoice 37020779?",
-      "type": "line-item",
-      "ground_truth": "1",
-      "answer": "1",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    },
-    {
-      "question": "What quantity of \"LAUREN RALPH LAUREN Womens Landette V-Neck A-Line Dress Size 6 NWT $200\" was purchased on invoice 96556696?",
-      "type": "line-item",
-      "ground_truth": "4",
-      "answer": "4",
-      "rank": 1,
-      "faithfulness": 1.0,
-      "answer_correctness": 1.0,
-      "context_recall": 1.0
-    }
-  ]
+	"version": "v1-hybrid",
+	"git": "v0-baseline-dirty",
+	"date": "2026-06-11",
+	"answer_model": "gpt-5.4-mini",
+	"judge_model": "deepseek-v4-pro",
+	"n_questions": 77,
+	"headline": {
+		"faithfulness": 0.883,
+		"answer_correctness": 0.779,
+		"context_recall": 0.805,
+		"hit@5": 0.974,
+		"rr": 0.94
+	},
+	"per_type": {
+		"category-spend": {
+			"faithfulness": 0,
+			"answer_correctness": 0.086,
+			"context_recall": 0,
+			"hit@5": 1,
+			"rr": 1
+		},
+		"gross-worth": {
+			"faithfulness": 1,
+			"answer_correctness": 0.754,
+			"context_recall": 0.844,
+			"hit@5": 1,
+			"rr": 1
+		},
+		"item-lookup": {
+			"faithfulness": 0.667,
+			"answer_correctness": 0.682,
+			"context_recall": 0.667,
+			"hit@5": 0.667,
+			"rr": 0.236
+		},
+		"line-item": {
+			"faithfulness": 0.667,
+			"answer_correctness": 0.85,
+			"context_recall": 0.833,
+			"hit@5": 1,
+			"rr": 1
+		},
+		"seller": {
+			"faithfulness": 1,
+			"answer_correctness": 0.938,
+			"context_recall": 0.929,
+			"hit@5": 1,
+			"rr": 1
+		}
+	},
+	"per_question": [
+		{
+			"question": "Who is the seller on invoice 10372826?",
+			"type": "seller",
+			"ground_truth": "Graham, Briggs and Anderson",
+			"answer": "Graham, Briggs and Anderson",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 58162869?",
+			"type": "gross-worth",
+			"ground_truth": "$ 36 210,72",
+			"answer": "36210.72",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.854,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 61356291?",
+			"type": "seller",
+			"ground_truth": "Chapman, Kim and Green",
+			"answer": "Chapman, Kim and Green",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 69941787?",
+			"type": "gross-worth",
+			"ground_truth": "$35572,00",
+			"answer": "35572.00",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.878,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 23004223?",
+			"type": "gross-worth",
+			"ground_truth": "$ 450,54",
+			"answer": "450.54",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.905,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 99788357?",
+			"type": "seller",
+			"ground_truth": "Lee-Everett",
+			"answer": "Lee-Everett",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 91966464?",
+			"type": "seller",
+			"ground_truth": "Taylor and Sons",
+			"answer": "Taylor and Sons",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 42242778?",
+			"type": "seller",
+			"ground_truth": "Roberson and Sons",
+			"answer": "Roberson and Sons",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 81432357?",
+			"type": "seller",
+			"ground_truth": "Tran LLC",
+			"answer": "Tran LLC",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 54533510?",
+			"type": "seller",
+			"ground_truth": "Tucker Inc",
+			"answer": "Tucker Inc",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 61619303?",
+			"type": "gross-worth",
+			"ground_truth": "$1057,33",
+			"answer": "1057.33",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.864,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 64480147?",
+			"type": "gross-worth",
+			"ground_truth": "$3046,86",
+			"answer": "3046.86",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.877,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 60241381?",
+			"type": "seller",
+			"ground_truth": "Stevens-Black",
+			"answer": "Stevens-Black",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 45181097?",
+			"type": "seller",
+			"ground_truth": "Long, Alvarez and Mendoza",
+			"answer": "Long, Alvarez and Mendoza",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 61268082?",
+			"type": "gross-worth",
+			"ground_truth": "$ 14,00",
+			"answer": "14.00",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.906,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 78566408?",
+			"type": "gross-worth",
+			"ground_truth": "228,68",
+			"answer": "None",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.058,
+			"context_recall": 0
+		},
+		{
+			"question": "Who is the seller on invoice 43846862?",
+			"type": "seller",
+			"ground_truth": "Phillips PLC USCGC Harrington FPO AE",
+			"answer": "Phillips PLC",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.901,
+			"context_recall": 0
+		},
+		{
+			"question": "Who is the seller on invoice 70123184?",
+			"type": "seller",
+			"ground_truth": "Kelly, Hernandez and Vaughan",
+			"answer": "Kelly, Hernandez and Vaughan",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 27892893?",
+			"type": "seller",
+			"ground_truth": "Reeves-Campbel.",
+			"answer": "Reeves-Campbell",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.214,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 57468195?",
+			"type": "gross-worth",
+			"ground_truth": "$98,58",
+			"answer": "98.58",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.914,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 67113656?",
+			"type": "seller",
+			"ground_truth": "Henson-Cross",
+			"answer": "Henson-Cross",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 27216737?",
+			"type": "gross-worth",
+			"ground_truth": "$18 561,36",
+			"answer": "18561.36",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.861,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 75106829?",
+			"type": "gross-worth",
+			"ground_truth": "$ 354,15",
+			"answer": "354.15",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.876,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 92627663?",
+			"type": "seller",
+			"ground_truth": "Solis Group",
+			"answer": "Solis Group",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 92802196?",
+			"type": "gross-worth",
+			"ground_truth": "686,75",
+			"answer": "686.75",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.945,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 53737787?",
+			"type": "gross-worth",
+			"ground_truth": "$ 205,50",
+			"answer": "205.50",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.888,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 16692901?",
+			"type": "seller",
+			"ground_truth": "Jackson-Oliver",
+			"answer": "Jackson-Oliver",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 27485789?",
+			"type": "gross-worth",
+			"ground_truth": "$ 705,92",
+			"answer": "705.92",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.891,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 49923258?",
+			"type": "gross-worth",
+			"ground_truth": "$1182,50",
+			"answer": "1182.50",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.9,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 38248291?",
+			"type": "seller",
+			"ground_truth": "Campbell and Sons USNS Smith FPO AP",
+			"answer": "Campbell and Sons",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.148,
+			"context_recall": 0
+		},
+		{
+			"question": "What is the total gross worth of invoice 56514066?",
+			"type": "gross-worth",
+			"ground_truth": "$ 49,38",
+			"answer": "49.38",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.891,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 16692901?",
+			"type": "gross-worth",
+			"ground_truth": "Total",
+			"answer": "79.13",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.082,
+			"context_recall": 0
+		},
+		{
+			"question": "Who is the seller on invoice 83613779?",
+			"type": "seller",
+			"ground_truth": "Larson-Grant",
+			"answer": "Larson-Grant",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 54569960?",
+			"type": "gross-worth",
+			"ground_truth": "$ 323,11",
+			"answer": "323.11",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.867,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 69087316?",
+			"type": "seller",
+			"ground_truth": "Simmons-Henry",
+			"answer": "Simmons-Henry",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 76999802?",
+			"type": "gross-worth",
+			"ground_truth": "$81661,14",
+			"answer": "None",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.05,
+			"context_recall": 0
+		},
+		{
+			"question": "Who is the seller on invoice 20385371?",
+			"type": "seller",
+			"ground_truth": "Hess and Sons",
+			"answer": "Hess and Sons",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 86602235?",
+			"type": "gross-worth",
+			"ground_truth": "$3729,94",
+			"answer": "339.09",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.122,
+			"context_recall": 0
+		},
+		{
+			"question": "What is the total gross worth of invoice 76820481?",
+			"type": "gross-worth",
+			"ground_truth": "$ 117,04",
+			"answer": "117.04",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.888,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 76330023?",
+			"type": "seller",
+			"ground_truth": "Baker-Jackson",
+			"answer": "Baker-Jackson",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 82087318?",
+			"type": "gross-worth",
+			"ground_truth": "$ 12 119,61",
+			"answer": "None",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.047,
+			"context_recall": 0
+		},
+		{
+			"question": "What is the total gross worth of invoice 61356291?",
+			"type": "gross-worth",
+			"ground_truth": "$ 212,09",
+			"answer": "212.09",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.889,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 26363966?",
+			"type": "seller",
+			"ground_truth": "Griffin, Cox and Day",
+			"answer": "Griffin, Cox and Day",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 60860535?",
+			"type": "seller",
+			"ground_truth": "Shields, Copeland and Gallegos",
+			"answer": "Shields, Copeland and Gallegos",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 10372826?",
+			"type": "gross-worth",
+			"ground_truth": "$ 276,60",
+			"answer": "276.6",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.87,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 61264237?",
+			"type": "gross-worth",
+			"ground_truth": "$ 288,15",
+			"answer": "288.15",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.874,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 57168813?",
+			"type": "gross-worth",
+			"ground_truth": "$ 19,77",
+			"answer": "19.77",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.643,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 46301857?",
+			"type": "gross-worth",
+			"ground_truth": "$65,29",
+			"answer": "65.29",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.9,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 59482422?",
+			"type": "gross-worth",
+			"ground_truth": "$ 934,31",
+			"answer": "934.31",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.897,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 99763738?",
+			"type": "gross-worth",
+			"ground_truth": "$403,25",
+			"answer": "403.25",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.897,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 43417184?",
+			"type": "gross-worth",
+			"ground_truth": "$ 339,79",
+			"answer": "339.79",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.911,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 15259432?",
+			"type": "seller",
+			"ground_truth": "Franklin, Buchanan and Reed",
+			"answer": "Franklin, Buchanan and Reed",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 80036269?",
+			"type": "gross-worth",
+			"ground_truth": "$79238,76",
+			"answer": "79238.76",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.905,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 10817861?",
+			"type": "seller",
+			"ground_truth": "Hughes-jones",
+			"answer": "Hughes-Jones",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.995,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 86883880?",
+			"type": "gross-worth",
+			"ground_truth": "$ 225,19",
+			"answer": "225.19",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.882,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 61268082?",
+			"type": "seller",
+			"ground_truth": "Henson, Mccarthy and Hart",
+			"answer": "Henson, Mccarthy and Hart",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What is the total gross worth of invoice 15700884?",
+			"type": "gross-worth",
+			"ground_truth": "$ 43,96",
+			"answer": "43.96",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 0.897,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 82087318?",
+			"type": "seller",
+			"ground_truth": "Hughes LLC",
+			"answer": "Hughes LLC",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 59482422?",
+			"type": "seller",
+			"ground_truth": "Avila-Espinoza",
+			"answer": "Avila-Espinoza",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "Who is the seller on invoice 74322107?",
+			"type": "seller",
+			"ground_truth": "Davis-Obrien",
+			"answer": "Davis-Obrien",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "How much did we spend in total on dresses, across all invoices?",
+			"type": "category-spend",
+			"ground_truth": "4483.91",
+			"answer": "Total spent on dresses across all invoices: **$3,255.84**",
+			"rank": 1,
+			"faithfulness": 0,
+			"answer_correctness": 0.064,
+			"context_recall": 0
+		},
+		{
+			"question": "How much did we spend in total on shoes, across all invoices?",
+			"type": "category-spend",
+			"ground_truth": "3567.62",
+			"answer": "$2,038.35",
+			"rank": 1,
+			"faithfulness": 0,
+			"answer_correctness": 0.112,
+			"context_recall": 0
+		},
+		{
+			"question": "How much did we spend in total on Nintendo consoles and games, across all invoices?",
+			"type": "category-spend",
+			"ground_truth": "21913.89",
+			"answer": "Total spent on Nintendo consoles and games: **$3,614.53**",
+			"rank": 1,
+			"faithfulness": 0,
+			"answer_correctness": 0.074,
+			"context_recall": 0
+		},
+		{
+			"question": "How much did we spend in total on desktop computers, across all invoices?",
+			"type": "category-spend",
+			"ground_truth": "44748.64",
+			"answer": "Total spent on desktop computers across all invoices: **40,626.57**",
+			"rank": 1,
+			"faithfulness": 0,
+			"answer_correctness": 0.087,
+			"context_recall": 0
+		},
+		{
+			"question": "How much did we spend in total on carpets and rugs, across all invoices?",
+			"type": "category-spend",
+			"ground_truth": "412590.73",
+			"answer": "Total spent on carpets and rugs across all invoices: **50,080.99**.",
+			"rank": 1,
+			"faithfulness": 0,
+			"answer_correctness": 0.093,
+			"context_recall": 0
+		},
+		{
+			"question": "Which vendor sold the item \"6'x3' Black Marble Inlaid Dining Center Table Top Peacock Inlay Patio Decor E966\"?",
+			"type": "item-lookup",
+			"ground_truth": "Smith, Anderson and Johnson",
+			"answer": "Weber-Wagner",
+			"rank": null,
+			"faithfulness": 0,
+			"answer_correctness": 0.079,
+			"context_recall": 0
+		},
+		{
+			"question": "Which vendor sold the item \"PocketGo Bittboy v2 White Retro Video Game Portable Console - 3.5 IPS display\"?",
+			"type": "item-lookup",
+			"ground_truth": "Smith and Sons",
+			"answer": "Smith and Sons",
+			"rank": 2,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "Which vendor sold the item \"Yilong 5.5'x8' Handwoven Silk Area Rugs Red Living Room Classic Carpets 1696\"?",
+			"type": "item-lookup",
+			"ground_truth": "Pacheco-Booker",
+			"answer": "Pacheco-Booker",
+			"rank": 4,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "Which vendor sold the item \"25 Inches Black Marble Center Table Top with Multi Stones Coffee Table for Home\"?",
+			"type": "item-lookup",
+			"ground_truth": "Smith, Anderson and Johnson",
+			"answer": "No matching invoice item is shown for “25 Inches Black Marble Center Table Top with Multi Stones Coffee Table for Home.”",
+			"rank": null,
+			"faithfulness": 1,
+			"answer_correctness": 0.011,
+			"context_recall": 0
+		},
+		{
+			"question": "Which vendor sold the item \"Dell Core 2 Duo Desktop Computer I Windows XP Pro I 4GB I 500GB\"?",
+			"type": "item-lookup",
+			"ground_truth": "Jacobs-Curtis",
+			"answer": "Jacobs-Curtis",
+			"rank": 3,
+			"faithfulness": 0,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "Which vendor sold the item \"5'x2' Marble White Center Table Top With 18\" Tall Stand Pauashell Inlay Art Deco\"?",
+			"type": "item-lookup",
+			"ground_truth": "Mccarty-Mcgee",
+			"answer": "Mccarty-Mcgee",
+			"rank": 3,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What quantity of \"Nintendo Switch Gaming Console W/ Neon Blue & Red Controllers,Carry Case,Cable\" was purchased on invoice 49923258?",
+			"type": "line-item",
+			"ground_truth": "2",
+			"answer": "None",
+			"rank": 1,
+			"faithfulness": 0,
+			"answer_correctness": 0.102,
+			"context_recall": 0
+		},
+		{
+			"question": "What quantity of \"a pair of wine glasses drawer 1\" was purchased on invoice 98151772?",
+			"type": "line-item",
+			"ground_truth": "1",
+			"answer": "1",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What quantity of \"NEW TOMMY HILFIGER RED WHITE BLUE #5 COLOR BLOCK BEACH SANDALS BOYS KIDS 8/9\" was purchased on invoice 10372826?",
+			"type": "line-item",
+			"ground_truth": "5",
+			"answer": "5",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What quantity of \"Nike SB Dunk High X Concepts Kids Size 3 Ugly Sweater 2017 Pre School A01557-446\" was purchased on invoice 43417184?",
+			"type": "line-item",
+			"ground_truth": "2",
+			"answer": "2",
+			"rank": 1,
+			"faithfulness": 0,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What quantity of \"Sperry Top-Sider Boys Toddlers Lace Tie Boat Shoes Brown 13M\" was purchased on invoice 37020779?",
+			"type": "line-item",
+			"ground_truth": "1",
+			"answer": "1",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		},
+		{
+			"question": "What quantity of \"LAUREN RALPH LAUREN Womens Landette V-Neck A-Line Dress Size 6 NWT $200\" was purchased on invoice 96556696?",
+			"type": "line-item",
+			"ground_truth": "4",
+			"answer": "4",
+			"rank": 1,
+			"faithfulness": 1,
+			"answer_correctness": 1,
+			"context_recall": 1
+		}
+	]
 }

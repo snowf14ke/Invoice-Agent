@@ -36,7 +36,7 @@ export default function BeforeAfter({ replaySet }: { replaySet: ReplaySet }) {
           setLive(null);
           setError(null);
         }}
-        className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2.5 text-sm text-zinc-200 focus:border-emerald-500 focus:outline-none"
+        className="w-full rounded-lg border border-ink-600 bg-ink-900 px-3 py-2.5 text-sm text-mist-200 focus:border-azure-400 focus:outline-none"
       >
         {replaySet.items.map((it, i) => (
           <option key={i} value={i}>
@@ -47,26 +47,26 @@ export default function BeforeAfter({ replaySet }: { replaySet: ReplaySet }) {
 
       <div className="grid gap-4 lg:grid-cols-2">
         {/* recorded */}
-        <div className="space-y-3 rounded-lg border border-zinc-800 bg-zinc-900/40 p-4">
-          <div className="text-xs font-medium uppercase tracking-wide text-amber-400">
+        <div className="panel space-y-3 p-4">
+          <div className="font-mono text-xs font-medium tracking-wide text-amber-400 uppercase">
             Recorded at {replaySet.version} ({replaySet.date}) — frozen
           </div>
-          <div className="whitespace-pre-wrap text-sm leading-relaxed text-zinc-300">
+          <div className="text-sm leading-relaxed whitespace-pre-wrap text-mist-300">
             {item.answer}
           </div>
           <TraceView trace={item.trace} />
         </div>
 
         {/* live */}
-        <div className="space-y-3 rounded-lg border border-zinc-800 bg-zinc-900/40 p-4">
+        <div className="panel space-y-3 p-4">
           <div className="flex items-center justify-between">
-            <div className="text-xs font-medium uppercase tracking-wide text-emerald-400">
+            <div className="font-mono text-xs font-medium tracking-wide text-emerald-400 uppercase">
               Current system — live
             </div>
             <button
               onClick={runLive}
               disabled={busy}
-              className="rounded-md bg-emerald-500 px-3 py-1.5 text-xs font-medium text-zinc-950 transition-colors hover:bg-emerald-400 disabled:opacity-50"
+              className="rounded-md bg-azure-500 px-3 py-1.5 text-xs font-semibold text-ink-950 transition-colors hover:bg-azure-400 disabled:opacity-50"
             >
               {busy ? "Running…" : "Run live"}
             </button>
@@ -74,7 +74,7 @@ export default function BeforeAfter({ replaySet }: { replaySet: ReplaySet }) {
           {error && <div className="text-sm text-rose-300">{error}</div>}
           {live ? (
             <>
-              <div className="whitespace-pre-wrap text-sm leading-relaxed text-zinc-200">
+              <div className="text-sm leading-relaxed whitespace-pre-wrap text-mist-200">
                 {live.answer}
               </div>
               <TraceView trace={live.trace} />
@@ -82,7 +82,7 @@ export default function BeforeAfter({ replaySet }: { replaySet: ReplaySet }) {
           ) : (
             !busy &&
             !error && (
-              <div className="text-sm text-zinc-500">
+              <div className="text-sm text-mist-500">
                 Run the same question against the system as deployed right now and compare.
               </div>
             )

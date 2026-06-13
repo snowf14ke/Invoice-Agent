@@ -37,6 +37,7 @@ known target invoices).
 | Version | faithfulness | answer-correctness | context-recall | hit@5 | MRR |
 |---|---|---|---|---|---|
 | v0-baseline | 0.844 | 0.741 | 0.779 | 0.935 | 0.935 |
+| **v1-hybrid** | **0.883** | **0.779** | **0.805** | **0.974** | **0.940** |
 
 The per-type breakdown is the roadmap. At v0: **item-lookup hit@5 = 0.167** (pure vector search
 almost never finds an invoice from an item description — embeddings drown the item signal in 77
@@ -47,8 +48,9 @@ no reranker.
 
 ## Roadmap
 
-1. **v1 — hybrid retrieval**: Postgres full-text + vector with reciprocal-rank fusion and a
-   similarity floor, shared by the agent tool and the eval.
+1. ~~**v1 — hybrid retrieval**~~ ✓ **shipped**: Postgres full-text + vector with reciprocal-rank
+   fusion and a similarity floor, shared by the agent tool and the eval (faithfulness 0.844→0.883,
+   correctness 0.741→0.779, hit@5 0.935→0.974).
 2. **v2 — reranker**: retrieve wide, cross-encoder rerank, threshold.
 3. **v3 — category aggregation**: classified line items + a `sum_spending` tool (the real fix for
    spending-by-category questions).

@@ -16,6 +16,8 @@ export function scoreColor(v: number) {
   return "text-rose-400";
 }
 
+/** A cell in a metric strip — the parent grid supplies hairline separators
+ *  (grid gap-px bg-ink-700, same pattern as the homepage proof bar). */
 export default function MetricBadge({
   label,
   value,
@@ -26,12 +28,12 @@ export default function MetricBadge({
   sublabel?: string;
 }) {
   return (
-    <div className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-4 py-3">
+    <div className="bg-ink-850 px-4 py-3">
       <div className={`font-mono text-2xl font-semibold ${scoreColor(value)}`}>
         {value.toFixed(3)}
       </div>
-      <div className="mt-1 text-xs uppercase tracking-wide text-zinc-400">{label}</div>
-      {sublabel && <div className="text-[11px] text-zinc-500">{sublabel}</div>}
+      <div className="mt-1 text-xs uppercase tracking-wide text-mist-400">{label}</div>
+      {sublabel && <div className="font-mono text-[11px] text-mist-500">{sublabel}</div>}
     </div>
   );
 }

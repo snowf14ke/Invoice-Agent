@@ -6,3 +6,11 @@ __pycache__/
 *.log
 .DS_Store
 /Portfolio website design/
+*.md.superpowers/
+
+# internal working artifacts (not for the public portfolio repo)
+plan.md
+.superpowers/
+web/.superpowers/
+docs/superpowers/
+*.pid

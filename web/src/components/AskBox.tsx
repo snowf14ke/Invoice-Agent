@@ -39,12 +39,12 @@ export default function AskBox({ suggestions }: { suggestions: string[] }) {
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Ask about the ingested invoices…"
-          className="flex-1 rounded-lg border border-zinc-700 bg-zinc-900 px-3.5 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-emerald-500 focus:outline-none"
+          className="flex-1 rounded-lg border border-ink-600 bg-ink-900 px-3.5 py-2.5 text-sm text-mist-100 placeholder:text-mist-500 focus:border-azure-400 focus:outline-none"
         />
         <button
           type="submit"
           disabled={busy}
-          className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-medium text-zinc-950 transition-colors hover:bg-emerald-400 disabled:opacity-50"
+          className="rounded-lg bg-azure-500 px-4 py-2 text-sm font-semibold text-ink-950 transition-colors hover:bg-azure-400 disabled:opacity-50"
         >
           {busy ? "Thinking…" : "Ask"}
         </button>
@@ -58,7 +58,7 @@ export default function AskBox({ suggestions }: { suggestions: string[] }) {
               setQuestion(s);
               run(s);
             }}
-            className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-400 transition-colors hover:border-emerald-500/50 hover:text-zinc-200"
+            className="rounded-full border border-ink-600 px-3 py-1 text-xs text-mist-400 transition-colors hover:border-azure-400/50 hover:text-mist-200"
           >
             {s.length > 70 ? s.slice(0, 67) + "…" : s}
           </button>
@@ -66,7 +66,7 @@ export default function AskBox({ suggestions }: { suggestions: string[] }) {
       </div>
 
       {busy && (
-        <div className="rounded-lg border border-zinc-800 bg-zinc-900/40 px-4 py-3 text-sm text-zinc-400">
+        <div className="panel px-4 py-3 text-sm text-mist-400">
           The agent is choosing tools and querying the database…
         </div>
       )}
@@ -78,8 +78,8 @@ export default function AskBox({ suggestions }: { suggestions: string[] }) {
         </div>
       )}
       {result && (
-        <div className="space-y-3 rounded-lg border border-zinc-800 bg-zinc-900/40 p-4">
-          <div className="whitespace-pre-wrap text-sm leading-relaxed text-zinc-200">
+        <div className="panel space-y-3 p-4">
+          <div className="text-sm leading-relaxed whitespace-pre-wrap text-mist-200">
             {result.answer || "(empty answer)"}
           </div>
           <TraceView trace={result.trace} />
