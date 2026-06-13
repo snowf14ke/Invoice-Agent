@@ -6,6 +6,7 @@ uvicorn[standard]               # ASGI server: uvicorn main:app
 langgraph
 langchain-core
 langchain-google-genai          # agent LLM (Gemini)
+langchain-deepseek
 
 # --- extraction + embeddings (OpenAI) ---
 openai                           # extraction (instructor) + text-embedding-3-small
