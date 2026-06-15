@@ -34,6 +34,7 @@ export const viewport: Viewport = {
 const nav = [
   { href: "/", label: "Portfolio" },
   { href: "/invoice-agent", label: "Case study" },
+  { href: "/demo", label: "Demo" },
   { href: "/evals", label: "Evals" },
 ];
 

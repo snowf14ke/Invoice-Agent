@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { DemoFrame, DemoLine } from "@/components/ProjectDemos";
 
 const PRESETS = [
-  "Сайн байна уу ? .",
+  "Сайн байна уу?.",
   "Өнөөдөр цаг агаар маш сайхан байна.",
   "Энэ бол монгол хэлний хиймэл дуу хоолой.",
 ];
